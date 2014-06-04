@@ -21,8 +21,11 @@ url = "http://192.168.16.14:8080/"
 
 * 向左:发送指令
     > cmd = doublemove?direction=0&distance=724  
+
     > doublemove 标识双指移动
+
     > direction 表示方向
+
     > distance 标识滑动距离
 
 * 向右
