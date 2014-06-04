@@ -37,3 +37,6 @@ url = "http://192.168.16.14:8080/"
 * 向下
     > cmd = doublemove?direction=3&distance=724  
 
+## 服务器搭建
+
+* 计划使用python搭建，因为python可以跨平台且实现http服务器很简单。可以修改 https://github.com/hanxi/py_http 来实现
