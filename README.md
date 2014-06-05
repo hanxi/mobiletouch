@@ -39,4 +39,5 @@ url = "http://192.168.16.14:8080/"
 
 ## 服务器搭建
 
-* 计划使用python搭建，因为python可以跨平台且实现http服务器很简单。可以修改 https://github.com/hanxi/py_http 来实现
+* https://github.com/hanxi/mobiletouch_pyhttp
+
