@@ -171,17 +171,31 @@ public class TouchAcitvity extends Activity {
                     mCanvas.drawText("当前Y坐标："+y, showX, 40, mPaint);  
                     mCanvas.drawText("事件触发时间："+event.getEventTime(), showX, 60, mPaint);  
                 }
-                if (pointCount==2
-                    && action==MotionEvent.ACTION_MOVE
+                if (action==MotionEvent.ACTION_MOVE
                     && moveDis>MOVE_MIN_DISTANCE) {
-                    String s = String.format("ACTION_MOVE2: %d,direction:%s",moveDis,MOVE_STRS[moveDir]);
-                    Log.v("test", s);
-                    // 双指滑动
-                    String cmd = String.format("doublemove?direction=%d&distance=%d",moveDir,moveDis);
-                    CmdSender.SendCmd(cmd);
-                    for (int i = 0; i < pointCount; i++) {  
-                        mVStartX[i] = (int) event.getX(i);  
-                        mVStartY[i] = (int) event.getY(i);  
+                    if (pointCount==1) {
+                        String s = String.format("ACTION_MOVE1: %d,direction:%s",moveDis,MOVE_STRS[moveDir]);
+                        Log.v("test", s);
+                        // 单指滑动
+                        int x = (int) event.getX(0);
+                        int y = (int) event.getY(0);
+                        int disX = x-mVStartX[0];
+                        int disY = y-mVStartY[0];
+                        String cmd = String.format("singlemove?disx=%d&disy=%d",disX,disY);
+                        CmdSender.SendCmd(cmd);
+                        mVStartX[0] = x;
+                        mVStartY[0] = y;
+                    }
+                    else if(pointCount==2) {
+                        String s = String.format("ACTION_MOVE2: %d,direction:%s",moveDis,MOVE_STRS[moveDir]);
+                        Log.v("test", s);
+                        // 双指滑动
+                        String cmd = String.format("doublemove?direction=%d&distance=%d",moveDir,moveDis);
+                        CmdSender.SendCmd(cmd);
+                        for (int i = 0; i < pointCount; i++) {  
+                            mVStartX[i] = (int) event.getX(i);  
+                            mVStartY[i] = (int) event.getY(i);  
+                        }
                     }
                 }
             }else {  
